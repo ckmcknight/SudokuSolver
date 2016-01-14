@@ -1,5 +1,4 @@
 from SudokuSolver import solve
-from samplePuzzles import *
 
 # Sample Hard Puzzle
 hard2 = '''000060840

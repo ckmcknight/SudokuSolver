@@ -15,8 +15,8 @@ class SudokuPuzzle():
         pzzl = [[range(1,len(row)+1) if char == "0" else [int(char)] for char in row] for row in pzzl]
         return pzzl
 
+    # Prints out a string representation of the puzzle
     def __str__(self):
-
         out = "Puzzle is solved: " + str(self.isSolved) + "\n"
         for row in self.grid:
             for col in row:
