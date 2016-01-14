@@ -12,11 +12,13 @@ hard2 = '''000060840
 014020000'''
 
 # Prints the input puzzle
+print("This is the original puzzle of Hard difficulty:\n")
 print(hard2.replace("0", "_").replace("",","))
-print ("\n" * 3)
+print ("\n" * 2)
 # Solves Puzzle
 puzzle = solve(hard2)
 # Prints whether or not the puzzle is solvable and then the solution
+print("This is the solution:\n")
 print(puzzle)
 
 
