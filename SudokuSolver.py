@@ -1,21 +1,37 @@
 from PuzzleReader import SudokuPuzzle
 from IsSudokuSolved import isSolved
+from copy import deepcopy
 
+#Solves a puzzle supplied in the correct format and returns a puzzle object
 def solve(puzzleStr):
     puzzle = SudokuPuzzle(puzzleStr)
-    solveEasy(puzzle)
-    print("Puzzle is solved: " + str(puzzle.isSolved))
-    print(str(puzzle))
+    puzzle.grid = solveHard(puzzle.grid)
+    puzzle.isSolved = isSolved(puzzle.grid)
+    return puzzle
 
+# Solves all Sudoku puzzles
+def solveHard(grid):
+    solveEasy(grid)
+    if isSolved(grid) or impossiblePuzzle(grid):
+        return grid
+    for row in range(len(grid)):
+        for column in range(len(grid)):
+            if len(grid[row][column]) != 1:
+                for number in grid[row][column]:
+                    copyGrid = deepcopy(grid)
+                    copyGrid[row][column] = [number]
+                    copyGrid = solveHard(copyGrid)
+                    if isSolved(copyGrid):
+                        return copyGrid
+    return grid
 
 # Takes in a puzzle object and solves as much as it can without guessing
-def solveEasy(puzzle):
+# This will solves all puzzles of Easy difficulty
+def solveEasy(grid):
     change=True
-    grid = puzzle.grid
     while change:
         change=False
         change=rowMaker(grid) or columnMaker(grid) or squareMaker(grid)
-    puzzle.isSolved = isSolved(puzzle)
 
 # Takes in a Row, Column, or box as a 1D list and removes possiblites based on
 # Completed Squares
@@ -62,35 +78,10 @@ def squareMaker(grid):
             change = change or rewritePuzzle(square)
     return change
 
-hard2 = '''000060840
-060000005
-000504170
-008009200
-020603050
-009100700
-096405000
-200000080
-014020000'''
-
-easy = '''003020600
-900305001
-001806400
-008102900
-700000008
-006708200
-002609500
-800203009
-005010300'''
-
-easy2= '''600000058
-450801000
-800070130
-204057900
-700206003
-006480502
-061040007
-000708016
-970000005'''
-
-print(solve(easy2))
-
+# Determines if a puzzle is impossible to solve
+def impossiblePuzzle(grid):
+    for row in grid:
+        for box in row:
+            if len(box) == 0:
+                return True
+    return False

@@ -1,6 +1,5 @@
 # The isSolved Function checks to see if a puzzle is solved
-def isSolved (puzzle):
-    grid = puzzle.grid
+def isSolved (grid):
     if (isLenOne(grid)):
         return squareChecker(grid) and columnChecker(grid) and rowChecker(grid)
     else:

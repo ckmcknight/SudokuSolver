@@ -16,7 +16,8 @@ class SudokuPuzzle():
         return pzzl
 
     def __str__(self):
-        out = ""
+
+        out = "Puzzle is solved: " + str(self.isSolved) + "\n"
         for row in self.grid:
             for col in row:
                 out += str(col)
