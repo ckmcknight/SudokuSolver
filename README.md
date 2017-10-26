@@ -1,4 +1,4 @@
-This is a Sudoku Solver that I made Fall of Freshman year and I recently fixed up.
+This is a Sudoku Solver that I made Fall of Freshman year.
 It solves puzzles of all difficulty.
 
 Language
